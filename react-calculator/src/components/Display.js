@@ -6,8 +6,13 @@ const styles = makeStyles(t => ({
     root: {
         '& .MuiTextField-root': {
             width: 255,
-        }
-    }
+            textAlign: 'right',
+        },
+        textAlign: 'right',
+    },
+    display: {
+        textAlign: 'right',
+    },
 }));
 
 const Display = ({content}) => {
@@ -16,9 +21,8 @@ const Display = ({content}) => {
         <div className={css.root}>
             <TextField 
             InputProps={{readOnly: true,}} 
-            className="display" 
-            variant="outlined">
-                {content}
+            className={css.display} 
+            variant="outlined" value={content}>
             </TextField>
         </div>
     );
