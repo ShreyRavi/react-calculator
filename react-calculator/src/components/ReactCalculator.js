@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Display from './Display';
 import Keypad from './Keypad';
@@ -12,6 +12,7 @@ const ReactCalculator = ({}) => {
         "secondNumber": NaN,
         "result": NaN
     });
+    const [showingResult, setShowingResult] = useState(false);
     const calculate = () => {
         try{
             let result = NaN;
@@ -49,18 +50,21 @@ const ReactCalculator = ({}) => {
         if(isNaN(calculation["firstNumber"])){
             calculation["firstNumber"] = parseFloat(displayContent);
             calculation["operator"] = operator;
-            setDisplayContent("");
+            setShowingResult(true);
             return;
         }
         else if(isNaN(calculation["secondNumber"])){
             calculation["secondNumber"] = parseFloat(displayContent);
-            setDisplayContent("");
+            setShowingResult(true);
             calculate();
             return;
         }
         else{
             calculate();
         }
+    }
+    const help = () => {
+        alert("React Calculator is made by Shrey Ravi. Visit the GitHub at https://github.com/ShreyRavi/react-calculator.");
     }
     return(
         <div className="ReactCalculator">
@@ -76,7 +80,15 @@ const ReactCalculator = ({}) => {
                     <Keypad content={displayContent} 
                     updateContent={setDisplayContent}
                     save={save}
-                    calculate={calculate}></Keypad>
+                    ac={() => {setDisplayContent(""); {setCalculation({
+                        "firstNumber": NaN,
+                        "operator": "",
+                        "secondNumber": NaN,
+                        "result": NaN
+                    })};}}
+                    showingResult={showingResult}
+                    setShowingResult={setShowingResult}
+                    help={help}></Keypad>
                 </Grid>
             </Grid>
         </div>

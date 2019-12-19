@@ -6,99 +6,60 @@ const Keypad = (
     {
         content, 
         updateContent,
-        calculate,
+        showingResult,
+        setShowingResult,
         save,
+        ac,
         help,
     }) => {
+    const toggleShowingResult = () => {
+        setShowingResult(!showingResult);
+    }
     const handleKeyPress = (keyID) => {
         if(keyID === "AC"){
-            updateContent("");
+            ac();
         }
         else if(keyID === "+/-"){
             let manipulatedFloat = parseFloat(content);
             manipulatedFloat = -1 * manipulatedFloat;
+            if(isNaN(manipulatedFloat)){return;}
             updateContent(manipulatedFloat.toString());
         }
         else if(keyID === "%"){
             let manipulatedFloat = parseFloat(content);
             manipulatedFloat = manipulatedFloat / 100.0;
+            if(isNaN(manipulatedFloat)){return;}
             updateContent(manipulatedFloat.toString());
         }
-        else if(keyID === "/"){
-            save("/");
+        else if("/*+-=".includes(keyID)){
+            save(keyID);
         }
-        else if(keyID === "7"){
+        else if("0123456789".includes(keyID)){
             let manipulatedContent = content;
-            manipulatedContent += "7";
-            updateContent(manipulatedContent);
-        }
-        else if(keyID === "8"){
-            let manipulatedContent = content;
-            manipulatedContent += "8";
-            updateContent(manipulatedContent);
-        }
-        else if(keyID === "9"){
-            let manipulatedContent = content;
-            manipulatedContent += "9";
-            updateContent(manipulatedContent);
-        }
-        else if(keyID === "x"){
-            save("*");
-        }
-        else if(keyID === "4"){
-            let manipulatedContent = content;
-            manipulatedContent += "4";
-            updateContent(manipulatedContent);
-        }
-        else if(keyID === "5"){
-            let manipulatedContent = content;
-            manipulatedContent += "5";
-            updateContent(manipulatedContent);
-        }
-        else if(keyID === "6"){
-            let manipulatedContent = content;
-            manipulatedContent += "6";
-            updateContent(manipulatedContent);
-        }
-        else if(keyID === "-"){
-            save("-");
-        }
-        else if(keyID === "1"){
-            let manipulatedContent = content;
-            manipulatedContent += "1";
-            updateContent(manipulatedContent);
-        }
-        else if(keyID === "2"){
-            let manipulatedContent = content;
-            manipulatedContent += "2";
-            updateContent(manipulatedContent);
-        }
-        else if(keyID === "3"){
-            let manipulatedContent = content;
-            manipulatedContent += "3";
-            updateContent(manipulatedContent);
-        }
-        else if(keyID === "+"){
-            save("+");
-        }
-        else if(keyID === "0"){
-            let manipulatedContent = content;
-            manipulatedContent += "0";
+            if(!showingResult){
+                if((parseFloat(manipulatedContent) === 0) && (!(manipulatedContent.includes(".")))){
+                    manipulatedContent = keyID;
+                }
+                else{
+                    manipulatedContent += keyID;
+                }
+            }
+            else{
+                manipulatedContent = keyID;
+                toggleShowingResult();
+            }
             updateContent(manipulatedContent);
         }
         else if(keyID === "."){
             let manipulatedContent = content;
-            if((manipulatedContent === "") || (manipulatedContent.indexOf(".") != -1)){
+            if((manipulatedContent === "") || (manipulatedContent.includes(".")) || showingResult){
                 return;
             }
             manipulatedContent += ".";
             updateContent(manipulatedContent);
         }
-        else if(keyID === "="){
-            save();
-        }
         else if(keyID === "?"){
-            
+            help();
         }
         else{
             //error
@@ -106,32 +67,32 @@ const Keypad = (
         }
     };
     return(
-        <Grid container spacing={12}>
-            <Grid container item xs={12} spacing={30}>
+        <Grid container>
+            <Grid container item xs={12}>
                 <Button onClick={() => handleKeyPress("AC")} color="secondary">AC </Button>
                 <Button onClick={() => handleKeyPress("+/-")} color="primary">+/-</Button>
                 <Button onClick={() => handleKeyPress("%")} color="primary"> % </Button>
-                <Button onClick={() => handleKeyPress("/")} color="primary"> / </Button>
+                <Button onClick={() => handleKeyPress("/")} color="primary"> ÷ </Button>
             </Grid>
-            <Grid container item xs={12} spacing={30}>
+            <Grid container item xs={12}>
                 <Button onClick={() => handleKeyPress("7")} color="primary"> 7 </Button>
                 <Button onClick={() => handleKeyPress("8")} color="primary"> 8 </Button>
                 <Button onClick={() => handleKeyPress("9")} color="primary"> 9 </Button>
-                <Button onClick={() => handleKeyPress("x")} color="primary"> x </Button>
+                <Button onClick={() => handleKeyPress("*")} color="primary"> × </Button>
             </Grid>
-            <Grid container item xs={12} spacing={30}>
+            <Grid container item xs={12}>
                 <Button onClick={() => handleKeyPress("4")} color="primary"> 4 </Button>
                 <Button onClick={() => handleKeyPress("5")} color="primary"> 5 </Button>
                 <Button onClick={() => handleKeyPress("6")} color="primary"> 6 </Button>
-                <Button onClick={() => handleKeyPress("-")} color="primary"> - </Button>
+                <Button onClick={() => handleKeyPress("-")} color="primary"> − </Button>
             </Grid>
-            <Grid container item xs={12} spacing={30}>
+            <Grid container item xs={12}>
                 <Button onClick={() => handleKeyPress("1")} color="primary"> 1 </Button>
                 <Button onClick={() => handleKeyPress("2")} color="primary"> 2 </Button>
                 <Button onClick={() => handleKeyPress("3")} color="primary"> 3 </Button>
                 <Button onClick={() => handleKeyPress("+")} color="primary"> + </Button>
             </Grid>
-            <Grid container item xs={12} spacing={30}>
+            <Grid container item xs={12}>
                 <Button onClick={() => handleKeyPress("0")} color="primary"> 0 </Button>
                 <Button onClick={() => handleKeyPress(".")} color="primary"> . </Button>
                 <Button onClick={() => handleKeyPress("=")} color="primary"> = </Button>
