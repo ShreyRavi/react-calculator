@@ -6,12 +6,9 @@ const Keypad = (
     {
         content, 
         updateContent,
-        handleDivide,
-        handleMultiply,
-        handleSubtract,
-        handleAdd,
-        handleEquals,
-        handleHelp,
+        calculate,
+        save,
+        help,
     }) => {
     const handleKeyPress = (keyID) => {
         if(keyID === "AC"){
@@ -28,7 +25,7 @@ const Keypad = (
             updateContent(manipulatedFloat.toString());
         }
         else if(keyID === "/"){
-            
+            save("/");
         }
         else if(keyID === "7"){
             let manipulatedContent = content;
@@ -46,7 +43,7 @@ const Keypad = (
             updateContent(manipulatedContent);
         }
         else if(keyID === "x"){
-            
+            save("*");
         }
         else if(keyID === "4"){
             let manipulatedContent = content;
@@ -64,7 +61,7 @@ const Keypad = (
             updateContent(manipulatedContent);
         }
         else if(keyID === "-"){
-            
+            save("-");
         }
         else if(keyID === "1"){
             let manipulatedContent = content;
@@ -82,7 +79,7 @@ const Keypad = (
             updateContent(manipulatedContent);
         }
         else if(keyID === "+"){
-            
+            save("+");
         }
         else if(keyID === "0"){
             let manipulatedContent = content;
@@ -98,7 +95,7 @@ const Keypad = (
             updateContent(manipulatedContent);
         }
         else if(keyID === "="){
-            
+            save();
         }
         else if(keyID === "?"){
             
