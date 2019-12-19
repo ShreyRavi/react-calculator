@@ -1,7 +1,7 @@
 # react-calculator
 An example of modern React code (using Hooks) for a calculator.
 
-## Live Demo
+## [Live Demo](https://shreyravi.github.io/react-calculator/)
 A live demo of the calculator can be accessed here: [Link](https://shreyravi.github.io/react-calculator/)
 
 ## Setup
