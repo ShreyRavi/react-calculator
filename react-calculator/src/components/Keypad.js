@@ -91,6 +91,9 @@ const Keypad = (
         }
         else if(keyID === "."){
             let manipulatedContent = content;
+            if((manipulatedContent === "") || (manipulatedContent.indexOf(".") != -1)){
+                return;
+            }
             manipulatedContent += ".";
             updateContent(manipulatedContent);
         }
