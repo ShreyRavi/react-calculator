@@ -1,6 +1,8 @@
 # [react-calculator](https://shreyravi.github.io/react-calculator/)
 An example of modern React code (using Hooks) for a calculator.
 
+<p align="center"><img src="https://raw.githubusercontent.com/ShreyRavi/react-calculator/master/react_calc_screenshot.PNG" height="93%" width="23%"><br />ReactCalculator component in action.</p>
+
 ## [Live Demo](https://shreyravi.github.io/react-calculator/)
 A live demo of the calculator can be accessed here: [https://shreyravi.github.io/react-calculator/](https://shreyravi.github.io/react-calculator/)
 
